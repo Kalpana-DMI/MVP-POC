@@ -6,7 +6,6 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import demo.Base;
 import demo.JsonReader;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -27,24 +26,5 @@ public class Login  {
 	    System.out.println(jsonData.ReadData(password));
 	}
 
-	 @When("^User login into application with username and password$")
-	    public void user_login_into_application_with_username_and_password() {
-		//Selenium project code
-		 System.out.println("login");
-		 log.info("credentials entered");
-	    }
-	 
-	  @Then("^Home page is populated$")
-	    public void home_page_is_populated() {
-		//Selenium project code
-		  System.out.println("home page");
-		  log.info("populated");
-	    }
-	  
-	  @And("^Medicare benefits are getting displayed$")
-	    public void medicare_benefits_are_getting_displayed() {
-		//Selenium project code
-		  System.out.println("Medicare benefits");
-	    }
-	 
+
 }
