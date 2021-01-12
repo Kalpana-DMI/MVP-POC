@@ -1,35 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results total="1" passed="1" failed="0" skipped="0">
+<testng-results skipped="0" failed="1" total="1" passed="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2021-01-05T06:47:20Z" name="Default suite" finished-at="2021-01-05T06:47:21Z" duration-ms="987">
+  <suite name="Default suite" duration-ms="20736" started-at="2021-01-12T08:01:05Z" finished-at="2021-01-12T08:01:26Z">
     <groups>
-      <group name="cucumber">
-        <method signature="AbstractTestNGCucumberTests.feature(cucumber.api.testng.CucumberFeatureWrapper)[pri:0, instance:cucumberOptions.TestRunner@4e31276e]" name="feature" class="cucumber.api.testng.AbstractTestNGCucumberTests"/>
-      </group> <!-- cucumber -->
     </groups>
-    <test started-at="2021-01-05T06:47:20Z" name="Default test" finished-at="2021-01-05T06:47:21Z" duration-ms="987">
-      <class name="cucumberOptions.TestRunner">
-        <test-method is-config="true" signature="setUpClass()[pri:0, instance:cucumberOptions.TestRunner@4e31276e]" started-at="2021-01-05T12:17:20Z" name="setUpClass" finished-at="2021-01-05T12:17:21Z" duration-ms="252" status="PASS">
+    <test name="Default test" duration-ms="20736" started-at="2021-01-12T08:01:05Z" finished-at="2021-01-12T08:01:26Z">
+      <class name="demo.Base">
+        <test-method status="PASS" signature="setExtent()[pri:0, instance:demo.Base@66a3ffec]" name="setExtent" is-config="true" duration-ms="162" started-at="2021-01-12T13:31:05Z" finished-at="2021-01-12T13:31:05Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- setUpClass -->
-        <test-method signature="feature(cucumber.api.testng.CucumberFeatureWrapper)[pri:0, instance:cucumberOptions.TestRunner@4e31276e]" started-at="2021-01-05T12:17:21Z" name="feature" description="Runs Cucumber Feature" data-provider="features" finished-at="2021-01-05T12:17:21Z" duration-ms="636" status="PASS">
+        </test-method> <!-- setExtent -->
+        <test-method status="PASS" signature="initializeDriver()[pri:0, instance:demo.Base@66a3ffec]" name="initializeDriver" is-config="true" duration-ms="19126" started-at="2021-01-12T13:31:05Z" finished-at="2021-01-12T13:31:25Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initializeDriver -->
+        <test-method status="FAIL" signature="titleTest()[pri:0, instance:demo.Base@66a3ffec]" name="titleTest" duration-ms="37" started-at="2021-01-12T13:31:25Z" finished-at="2021-01-12T13:31:25Z">
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[expected [abc] but found [Health Insurance, Dental Insurance & Medicare | MVP Health Care]]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: expected [abc] but found [Health Insurance, Dental Insurance & Medicare | MVP Health Care]
+	at org.testng.Assert.fail(Assert.java:94)
+	at org.testng.Assert.failNotEquals(Assert.java:513)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:135)
+	at org.testng.Assert.assertEquals(Assert.java:116)
+	at org.testng.Assert.assertEquals(Assert.java:190)
+	at org.testng.Assert.assertEquals(Assert.java:200)
+	at demo.Base.titleTest(Base.java:51)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:86)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:643)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:820)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1128)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:782)
+	at org.testng.TestRunner.run(TestRunner.java:632)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:366)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:361)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:319)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:268)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1244)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1169)
+	at org.testng.TestNG.run(TestNG.java:1064)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:132)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:236)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:81)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- titleTest -->
+        <test-method status="PASS" signature="teardown(org.testng.ITestResult)[pri:0, instance:demo.Base@66a3ffec]" name="teardown" is-config="true" duration-ms="1055" started-at="2021-01-12T13:31:25Z" finished-at="2021-01-12T13:31:26Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[Application Login]]>
+                <![CDATA[[TestResult name=titleTest status=FAILURE method=Base.titleTest()[pri:0, instance:demo.Base@66a3ffec] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- feature -->
-        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:cucumberOptions.TestRunner@4e31276e]" started-at="2021-01-05T12:17:21Z" name="tearDownClass" finished-at="2021-01-05T12:17:21Z" duration-ms="8" status="PASS">
+        </test-method> <!-- teardown -->
+        <test-method status="PASS" signature="endReport()[pri:0, instance:demo.Base@66a3ffec]" name="endReport" is-config="true" duration-ms="336" started-at="2021-01-12T13:31:26Z" finished-at="2021-01-12T13:31:26Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- tearDownClass -->
-      </class> <!-- cucumberOptions.TestRunner -->
+        </test-method> <!-- endReport -->
+      </class> <!-- demo.Base -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

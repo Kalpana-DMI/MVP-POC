@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
+import org.json.simple.parser.ParseException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -25,20 +26,23 @@ import com.relevantcodes.extentreports.LogStatus;
 
 public class Base {
 
-	public  WebDriver driver;
+	public static  WebDriver driver;
 	public ExtentReports extent;
 	public ExtentTest test;
+	JsonReader jsonData=new JsonReader();
 	
 	@BeforeMethod
-public WebDriver initializeDriver() throws IOException
+public WebDriver initializeDriver() throws IOException, ParseException
 {
-	System.setProperty("webdriver.chrome.driver", "C:\\Users\\adang\\Desktop\\chromedriver.exe");
+	String url="URL";	
+	String path =System.getProperty("user.dir");
+	System.setProperty("webdriver.chrome.driver", path + "\\Drivers\\chromedriver.exe");
 	driver = new ChromeDriver();
-	driver.get("https://wwwacc.mvphealthcare.com/");
+	driver.get(jsonData.ReadData(url));
 	driver.manage().window().maximize();
 	System.out.println(driver.getTitle());
-driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-return driver;
+    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    return driver;
 }
 
 	@Test

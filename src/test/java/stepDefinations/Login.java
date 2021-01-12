@@ -17,7 +17,8 @@ public class Login  {
 	
 	@Given("^User enters the \"([^\"]*)\" to launch the application$")
 	public void user_enters_the_to_launch_the_application(String url) throws Throwable {
-	    base.LaunchURL(jsonData.ReadData(url));
+	    //base.LaunchURL(jsonData.ReadData(url));
+	    
 	}
 	
 	@When("^user enters \"([^\"]*)\" and \"([^\"]*)\"$")
