@@ -46,3 +46,17 @@ And Click on Estimate my HealthCare Costs button
 Then Validate plan details appeared on the page
 And Logout from the application
 
+
+Scenario: Validate DestinationRX tool
+Given  User is on application homepage
+When User Clicks on Shop for a Plan Link
+And Select the Medicare link
+Then Choose Shop for a Medicare Plan link
+And Select Country from the dropdown menu
+Then Click on "See Plan Options" button
+And User click on "Estimate your prescription drug and out of pocket costs per plan" link
+And Validate that user is redirected to a new site/window "DestinationRX"
+And User enters the "12345" as ZipCode 
+And Click on View Plans
+Then Validate all the plans appeared on the page
+And Logout from the application
