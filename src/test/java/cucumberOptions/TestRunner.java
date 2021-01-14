@@ -4,9 +4,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.junit.runner.RunWith;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
 import cucumber.api.CucumberOptions;
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
 import cucumber.api.junit.Cucumber;
 import cucumber.api.testng.AbstractTestNGCucumberTests;
 import demo.Base;
@@ -18,14 +21,19 @@ import demo.Base;
 		)
 public class TestRunner extends AbstractTestNGCucumberTests {
 
-	Base base=new Base();
-	@BeforeSuite
-	public void initilization() throws FileNotFoundException, IOException {
-		try {
-			base.initializeDriver();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
+//	Base base=new Base();
+//	@BeforeSuite
+//	public void initilization() throws FileNotFoundException, IOException {
+//		try {
+//			base.initializeDriver();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
+//	
+//	@AfterSuite
+//	public void cleanup() {
+//	 base.CloseDriver();
+//		
+//	}
 }

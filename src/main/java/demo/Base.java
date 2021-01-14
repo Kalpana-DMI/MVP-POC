@@ -65,7 +65,7 @@ public void teardown(ITestResult result) throws IOException {
 	else if(result.getStatus()==ITestResult.SUCCESS) {
 		test.log(LogStatus.PASS, "Test case passed is"+result.getName());
 	}
-	driver.quit();
+	//driver.quit();
 }
 	
 @BeforeTest
@@ -89,5 +89,10 @@ public  static String getScreenshot(WebDriver driver, String screenshotName) thr
 	String destination=System.getProperty("user.dir")+"/FailedTestsScreenshots/"+screenshotName+dateName+".png";
 	FileUtils.copyFile(source, new File(destination));
 	return destination;
+}
+
+public void CloseDriver() {
+  driver.quit();
+	
 }
 }

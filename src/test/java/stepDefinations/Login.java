@@ -22,9 +22,11 @@ public class Login extends Base {
 	private static Logger log =LogManager.getLogger(Login.class.getName());
 	JsonReader jsonData=new JsonReader();
 	CommonLib commonLib=new CommonLib();
+	 
 	
 	@Given("^User is on application homepage$")
 	public void user_is_on_application_homepage() throws Throwable {
+	   driver=initializeDriver();
 	   WebElement image=driver.findElement(By.xpath("//img[@alt=\"MVP Health Care(R)\"]"));
 	   Assert.assertTrue(image.isDisplayed(), "image is not dispalyed");
 	}
@@ -100,9 +102,92 @@ public class Login extends Base {
 	}
 
 
-	@Then("^Logout from the application$")
-	public void logout_from_the_application() throws Throwable {
-	   
+//	@Given("^User is on application homepage$")
+//	public void user_is_on_application_homepage() throws Throwable {
+//	driver =base.initializeDriver();
+//	}
+//	@When("^User Clicks on Shop for a Plan Link$")
+//	public void user_Clicks_on_Shop_for_a_Plan_Link() throws Throwable {
+//	driver.findElement(By.linkText("Shop for a Plan")).click();
+//	}
+//	@When("^Select the Medicare link$")
+//	public void select_the_Medicare_link() throws Throwable {
+//	WebElement element = driver.findElement(By.xpath("//div[@class='content']/ul/li[3]"));
+//	commonLib.scrollToElement(element);
+//	element.click();
+//	}
+//	@Then("^Choose Shop for a Medicare Plan link$")
+//	public void choose_Shop_for_a_Medicare_Plan_link() throws Throwable {
+//	WebElement element = driver.findElement(By.xpath("//*[contains(text(),'Shop for a Medicare plan')]"));
+//	element.click();
+//	}
+//	@Then("^Select Country from the dropdown menu$")
+//	public void select_Country_from_the_dropdown_menu() throws Throwable {
+//	WebElement element = driver.findElement(By.id("countySelect"));
+//	String value ="NY|East|Albany|capital-district";
+//	commonLib.selectDropdownByValue(element, value);
+//	}
+
+//	@Then("^Click on \"([^\"]*)\" button$")
+//	public void click_on_button(String options) throws Throwable {
+//	WebElement element = driver.findElement(By.xpath("//input[@value='See Plan Options']"));
+//	if(options.equalsIgnoreCase("See plan options")) {
+//	element.click();
+//	}
+//	}
+
+//	@Then("^User click on \"([^\"]*)\" link$")
+//	public void user_click_on_link(String link) throws Throwable {
+//	WebElement element = driver.findElement(By.xpath("//div[@class='costcalc_estimatehc_link']/a/p"));
+//	if(link.equalsIgnoreCase("Estimate your annual medical health care costs")) {
+//	commonLib.scrollToElement(element);
+//	element.click();
+//	}
+//	}
+
+	@Then("^User enters (.+) , (.+) , (.+) and (.+)$")
+	public void user_enters_and(String visitstophysician, String visittospecialist, String otherservices, String occurences) throws Throwable {
+	driver.findElement(By.xpath("//input[@name='pcp-visits']")).sendKeys(visitstophysician);
+	driver.findElement(By.xpath("//input[@name='spec-visits']")).sendKeys(visittospecialist);
+	driver.findElement(By.xpath("//input[@name='occurence_new0']")).sendKeys(occurences);
+	WebElement medicalServices =driver.findElement(By.id("med-services_new0"));
+	commonLib.selectDropdownByVisibleText(medicalServices, otherservices);
 	}
 
+	@And("^Click on Estimate my HealthCare Costs button$")
+	public void click_on_estimate_my_healthcare_costs_button() throws Throwable {
+	WebElement element = driver.findElement(By.xpath("//div[@class='buttonwrap']/button"));
+	element.click();
+	}
+
+	@Then("^Validate plan details appeared on the page$")
+	public void validate_plan_details_appeared_on_the_page() throws Throwable {
+	String expectedPlanName=null;
+	List<WebElement> element = driver.findElements(By.xpath("//*[contains(@class,'plan-name')]/b"));
+	for(WebElement s:element) {
+	expectedPlanName=s.getText();
+	}
+	if(expectedPlanName.equals("MVP® Medicare WellSelect®")) {
+	System.out.println("Validated plan1 details appeared on page");
+	}else if(expectedPlanName.equals("MVP Medicare Secure")) {
+	System.out.println("Validated plan2 details appeared on page");
+	}else if(expectedPlanName.equals("MVP Medicare Secure Plus")) {
+	System.out.println("Validated plan3 details appeared on page");
+	}else if(expectedPlanName.equals("MVP® Medicare WellSelect® Plus")) {
+	System.out.println("Validated plan4 details appeared on page");
+	}else if(expectedPlanName.equals("MVP Medicare Preferred Gold")) {
+	System.out.println("Validated plan5 details appeared on page");
+	}
+	else {
+	System.out.println("Plan details not appeared on page");
+	}
+	}
+
+	@Then("^Close the browser$")
+	public void close_the_browser() throws Throwable {
+	    driver.quit();
+	}
 }
+	
+	
+
