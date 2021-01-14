@@ -31,7 +31,7 @@ public class Base {
 	public ExtentTest test;
 	JsonReader jsonData=new JsonReader();
 	
-	@BeforeMethod
+	//@BeforeMethod
 public WebDriver initializeDriver() throws IOException, ParseException
 {
 	String url="URL";	

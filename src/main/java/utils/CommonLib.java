@@ -1,12 +1,17 @@
 package utils;
 
 import java.util.Random;
+
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
+
 import demo.Base;
+
 
 public class CommonLib extends Base{
 	//Base base=new Base();
@@ -78,6 +83,20 @@ public class CommonLib extends Base{
 			removehighlightElement(element);	
 	}
 
+	public void ValidateTitle(String expected) throws InterruptedException {
+		Thread.sleep(3000);
+		String childWindow = driver.getWindowHandles().toArray()[1].toString();
+		driver.switchTo().window(childWindow);
+		String Actual = driver.getCurrentUrl();
+		System.out.println(Actual);
+		Assert.assertTrue(Actual.contains(expected));
+	}
+	
+	public void AcceptAlert() {
+		 Alert alert = driver.switchTo().alert();
+		 alert.accept();
+	}
+	
 	public  void ClickUsingJavaScript(WebElement element) throws Exception {
 		try {
 			if (element.isEnabled() && element.isDisplayed()) {
