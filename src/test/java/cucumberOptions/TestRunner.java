@@ -27,7 +27,6 @@ import demo.ConfigFileReader;
 		features = "src/test/java/features",
 		glue = "stepDefinations",tags="@test",
 		plugin= {"com.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/report.html"},
-		//plugin= {"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:target/cucumber-reports/report.html"}
 		monochrome=true
 		)
 public class TestRunner extends  AbstractTestNGCucumberTests {

@@ -27,7 +27,6 @@ public class Login extends Base {
 	private static Logger log =LogManager.getLogger(Login.class.getName());
 	JsonReader jsonData=new JsonReader();
 	CommonLib commonLib=new CommonLib();
-
 	ObjectRepository repoObject = new ObjectRepository();
 
 	
@@ -62,15 +61,14 @@ public class Login extends Base {
 
 	@Then("^Click on \"([^\"]*)\" button$")
 	public void click_on_button(String SeePlansBtn) throws Throwable {
-		WebElement viewPlansBtn=driver.findElement(By.xpath("//input[@value='"+SeePlansBtn+"']"));
-		viewPlansBtn.click();
+		repoObject.seePlansBtn(SeePlansBtn).click();
+		
 	}
 
 	@Then("^User click on \"([^\"]*)\" link$")
 	public void user_click_on_link(String PrescriptionPlanLink) throws Throwable {
-		WebElement prescriptionlink=driver.findElement(By.xpath("//p[text()='"+PrescriptionPlanLink+"']"));
-		commonLib.scrollToElement(prescriptionlink);
-		prescriptionlink.click();
+		commonLib.scrollToElement(repoObject.prescriptionLink(PrescriptionPlanLink));
+		repoObject.prescriptionLink(PrescriptionPlanLink).click();
 	}
 
 	@Then("^Validate that user is redirected to a new site/window \"([^\"]*)\"$")
@@ -95,19 +93,19 @@ public class Login extends Base {
 	public void validate_all_below_sections_appeared_with_available_no_of_plans(DataTable availableplans) throws Throwable {
 		List<List<String>> list = availableplans.raw();
 		for(int i=0,j=0;j<3;j++) {
+		/**Not creating repo element for the below element because of dynamic variables i & j
+		**/
 		WebElement Plan1=driver.findElement(By.xpath("//span[text()=' "+list.get(i).get(j)+"']"));
-		System.out.println(list.get(i).get(j));
 		Assert.assertEquals(Plan1.getText(),list.get(i).get(j));
 		}
 	}
 
 	@Then("^User enters (.+) , (.+) , (.+) and (.+)$")
 	public void user_enters_and(String visitstophysician, String visittospecialist, String otherservices, String occurences) throws Throwable {
-		//ObjectRepository repoObject = new ObjectRepository(driver);
 		repoObject.physicianVisits().sendKeys(visitstophysician);
 		repoObject.specialistVisits().sendKeys(visittospecialist);
 		repoObject.occurenceVisits().sendKeys(occurences);
-	commonLib.selectDropdownByVisibleText(repoObject.medicalServices(), otherservices);
+	    commonLib.selectDropdownByVisibleText(repoObject.medicalServices(), otherservices);
 	}
 
 	@And("^Click on Estimate my HealthCare Costs button$")
@@ -137,16 +135,11 @@ public class Login extends Base {
 	System.out.println("Plan details not appeared on page");
 	}
 	}
-
-	@Then("^Close the browser$")
-	public void close_the_browser() throws Throwable {
-		
-	    driver.quit();
-	}
 	@After
     public void execute_after_every_scenario(Scenario scenario) throws InterruptedException, IOException
     {
       Base.TakeScreenshot(scenario);
+      driver.quit();
     }
 }
 	

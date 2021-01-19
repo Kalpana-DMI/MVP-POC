@@ -7,12 +7,7 @@ import org.openqa.selenium.WebElement;
 public class ObjectRepository extends Base {
 
 	public ObjectRepository() {
-   
 	}
-	//WebDriver driver=null;
-	//public ObjectRepository(WebDriver driver) {
-		//this.driver = driver;
-	//}
 
 By image = By.xpath("//img[@alt=\"MVP Health Care(R)\"]");
 By shopLink = By.xpath("//li[@class='shoplink']//a[text()='Shop for a Plan']");
@@ -28,7 +23,15 @@ By occurence = By.xpath("//input[@name='occurence_new0']");
 By services = By.id("med-services_new0");
 
 
+public WebElement seePlansBtn(String SeePlansBtn) {
+	
+	return driver.findElement(By.xpath("//input[@value='"+SeePlansBtn+"']"));
+}
 
+public WebElement prescriptionLink(String PrescriptionPlanLink) {
+	
+	return driver.findElement(By.xpath("//p[text()='"+PrescriptionPlanLink+"']"));	
+}
 
 public WebElement homePage() {
 	return driver.findElement(image);
