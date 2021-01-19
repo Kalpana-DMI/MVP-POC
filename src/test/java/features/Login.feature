@@ -10,7 +10,7 @@ And Select Country from the dropdown menu
 Then Click on "See Plan Options" button
 And User click on "Estimate your prescription drug and out-of-pocket costs per plan" link
 And Validate that user is redirected to a new site/window "destinationrx.com"
-And User enters the "23456" as ZipCode 
+And User enters the "12345" as ZipCode 
 And Click on View Plans
 Then Validate all below sections appeared with available no. of plans
 | Medicare Advantage Prescription Drug Plans| Medicare Advantage Plans| Prescription Drug Plans|

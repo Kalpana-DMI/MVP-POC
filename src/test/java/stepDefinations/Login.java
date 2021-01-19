@@ -1,14 +1,18 @@
 package stepDefinations;
 
 import cucumber.api.DataTable;
+import cucumber.api.Scenario;
+import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import demo.Base;
+
 import demo.JsonReader;
 import utils.CommonLib;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -22,7 +26,7 @@ public class Login extends Base {
 	private static Logger log =LogManager.getLogger(Login.class.getName());
 	JsonReader jsonData=new JsonReader();
 	CommonLib commonLib=new CommonLib();
-	 
+	// Hooks hooks=new Hooks();
 	
 	@Given("^User is on application homepage$")
 	public void user_is_on_application_homepage() throws Throwable {
@@ -101,50 +105,6 @@ public class Login extends Base {
 		}
 	}
 
-
-//	@Given("^User is on application homepage$")
-//	public void user_is_on_application_homepage() throws Throwable {
-//	driver =base.initializeDriver();
-//	}
-//	@When("^User Clicks on Shop for a Plan Link$")
-//	public void user_Clicks_on_Shop_for_a_Plan_Link() throws Throwable {
-//	driver.findElement(By.linkText("Shop for a Plan")).click();
-//	}
-//	@When("^Select the Medicare link$")
-//	public void select_the_Medicare_link() throws Throwable {
-//	WebElement element = driver.findElement(By.xpath("//div[@class='content']/ul/li[3]"));
-//	commonLib.scrollToElement(element);
-//	element.click();
-//	}
-//	@Then("^Choose Shop for a Medicare Plan link$")
-//	public void choose_Shop_for_a_Medicare_Plan_link() throws Throwable {
-//	WebElement element = driver.findElement(By.xpath("//*[contains(text(),'Shop for a Medicare plan')]"));
-//	element.click();
-//	}
-//	@Then("^Select Country from the dropdown menu$")
-//	public void select_Country_from_the_dropdown_menu() throws Throwable {
-//	WebElement element = driver.findElement(By.id("countySelect"));
-//	String value ="NY|East|Albany|capital-district";
-//	commonLib.selectDropdownByValue(element, value);
-//	}
-
-//	@Then("^Click on \"([^\"]*)\" button$")
-//	public void click_on_button(String options) throws Throwable {
-//	WebElement element = driver.findElement(By.xpath("//input[@value='See Plan Options']"));
-//	if(options.equalsIgnoreCase("See plan options")) {
-//	element.click();
-//	}
-//	}
-
-//	@Then("^User click on \"([^\"]*)\" link$")
-//	public void user_click_on_link(String link) throws Throwable {
-//	WebElement element = driver.findElement(By.xpath("//div[@class='costcalc_estimatehc_link']/a/p"));
-//	if(link.equalsIgnoreCase("Estimate your annual medical health care costs")) {
-//	commonLib.scrollToElement(element);
-//	element.click();
-//	}
-//	}
-
 	@Then("^User enters (.+) , (.+) , (.+) and (.+)$")
 	public void user_enters_and(String visitstophysician, String visittospecialist, String otherservices, String occurences) throws Throwable {
 	driver.findElement(By.xpath("//input[@name='pcp-visits']")).sendKeys(visitstophysician);
@@ -185,8 +145,14 @@ public class Login extends Base {
 
 	@Then("^Close the browser$")
 	public void close_the_browser() throws Throwable {
+		
 	    driver.quit();
 	}
+	@After
+    public void execute_after_every_scenario(Scenario scenario) throws InterruptedException, IOException
+    {
+      Base.TakeScreenshot(scenario);
+    }
 }
 	
 	

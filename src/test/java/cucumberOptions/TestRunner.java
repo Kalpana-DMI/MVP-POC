@@ -1,39 +1,48 @@
 package cucumberOptions;
 
-import java.io.FileNotFoundException;
+import java.io.File;
 import java.io.IOException;
 
+import org.junit.AfterClass;
 import org.junit.runner.RunWith;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterTest;
+
+import com.cucumber.listener.Reporter;
+import com.google.common.io.Files;
 
 import cucumber.api.CucumberOptions;
+import cucumber.api.Scenario;
 import cucumber.api.java.After;
-import cucumber.api.java.Before;
 import cucumber.api.junit.Cucumber;
 import cucumber.api.testng.AbstractTestNGCucumberTests;
 import demo.Base;
+import demo.ConfigFileReader;
+
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
 		features = "src/test/java/features",
-		glue = "stepDefinations",tags="@test"
+		glue = "stepDefinations",tags="@test",
+		plugin= {"com.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/report.html"},
+		//plugin= {"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:target/cucumber-reports/report.html"}
+		monochrome=true
 		)
-public class TestRunner extends AbstractTestNGCucumberTests {
-
-//	Base base=new Base();
-//	@BeforeSuite
-//	public void initilization() throws FileNotFoundException, IOException {
-//		try {
-//			base.initializeDriver();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
-//	
-//	@AfterSuite
-//	public void cleanup() {
-//	 base.CloseDriver();
-//		
-//	}
+public class TestRunner extends  AbstractTestNGCucumberTests {
+  
+	@AfterClass()
+	public static void writeExtentReport() throws IOException {
+		
+		Reporter.loadXMLConfig(new File(ConfigFileReader.getReportConfigPath()));
+		Reporter.setSystemInfo("User Name", System.getProperty("user.name"));
+	     Reporter.setSystemInfo("Time Zone", System.getProperty("user.timezone"));
+	     Reporter.setSystemInfo("Machine", "Windows 10" + "64 Bit");
+	     Reporter.setSystemInfo("Selenium", "3.7.0");
+	     Reporter.setSystemInfo("Maven", "3.6.3");
+	     Reporter.setSystemInfo("Java Version", "1.8.0_271");
+	     
+	}
+	
 }
