@@ -7,6 +7,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import demo.Base;
 import demo.JsonReader;
+import demo.ObjectRepository;
 import utils.CommonLib;
 
 import java.util.List;
@@ -22,39 +23,36 @@ public class Login extends Base {
 	private static Logger log =LogManager.getLogger(Login.class.getName());
 	JsonReader jsonData=new JsonReader();
 	CommonLib commonLib=new CommonLib();
+	ObjectRepository repoObject = new ObjectRepository();
 	 
 	
 	@Given("^User is on application homepage$")
 	public void user_is_on_application_homepage() throws Throwable {
-	   driver=initializeDriver();
-	   WebElement image=driver.findElement(By.xpath("//img[@alt=\"MVP Health Care(R)\"]"));
-	   Assert.assertTrue(image.isDisplayed(), "image is not dispalyed");
+		driver=initializeDriver();
+	   Assert.assertTrue(repoObject.homePage().isDisplayed(), "image is not dispalyed");
 	}
 
 	@When("^User Clicks on Shop for a Plan Link$")
 	public void user_Clicks_on_Shop_for_a_Plan_Link() throws Throwable {
-	    WebElement shoplink=driver.findElement(By.xpath("//li[@class='shoplink']//a[text()='Shop for a Plan']"));
-	    shoplink.click();
+		repoObject.shopPlan().click();
 	}
 
 	@When("^Select the Medicare link$")
 	public void select_the_Medicare_link() throws Throwable {
-		WebElement medicarelink=driver.findElement(By.xpath("(//a[text()='Medicare'])[3]"));
-		commonLib.scrollToElement(medicarelink);
-		medicarelink.click();
+		Thread.sleep(3000);
+		commonLib.scrollToElement(repoObject.selectMedicare());
+		repoObject.selectMedicare().click();
 	}
 
 	@Then("^Choose Shop for a Medicare Plan link$")
 	public void choose_Shop_for_a_Medicare_Plan_link() throws Throwable {
-		WebElement getstartedlink=driver.findElement(By.xpath("//a//p[text()='Get Started']"));
-		commonLib.scrollToElement(getstartedlink);
-		getstartedlink.click();
+		commonLib.scrollToElement(repoObject.chooseShop());
+		repoObject.chooseShop().click();
 	}
 
 	@Then("^Select Country from the dropdown menu$")
 	public void select_Country_from_the_dropdown_menu() throws Throwable {
-	  WebElement countryDrpdown=driver.findElement(By.id("countySelect"));
-	  commonLib.selectDropdownByValue(countryDrpdown, "NY|East|Columbia|capital-district");
+		commonLib.selectDropdownByValue(repoObject.selectCountry(), "NY|East|Columbia|capital-district");
 	}
 
 	@Then("^Click on \"([^\"]*)\" button$")
@@ -78,16 +76,13 @@ public class Login extends Base {
 
 	@Then("^User enters the \"([^\"]*)\" as ZipCode$")
 	public void user_enters_the_as_ZipCode(String zipcode) throws Throwable {
-	    WebElement zipCodefield=driver.findElement(By.xpath("//button[text()=\" View plans \"]//../../..//input"));
-	    zipCodefield.sendKeys(zipcode);
+		repoObject.zipCode().sendKeys(zipcode);
 	}
 
 	@Then("^Click on View Plans$")
 	public void click_on_View_Plans() throws Throwable {
-		WebElement viewPlanslink=driver.findElement(By.xpath("//button[text()=' View plans ']"));
-		//viewPlanslink.click();
 		Thread.sleep(3000);
-		commonLib.ClickUsingJavaScript(viewPlanslink);
+		commonLib.ClickUsingJavaScript(repoObject.viewPlans());
 		
 	}
 
@@ -147,17 +142,16 @@ public class Login extends Base {
 
 	@Then("^User enters (.+) , (.+) , (.+) and (.+)$")
 	public void user_enters_and(String visitstophysician, String visittospecialist, String otherservices, String occurences) throws Throwable {
-	driver.findElement(By.xpath("//input[@name='pcp-visits']")).sendKeys(visitstophysician);
-	driver.findElement(By.xpath("//input[@name='spec-visits']")).sendKeys(visittospecialist);
-	driver.findElement(By.xpath("//input[@name='occurence_new0']")).sendKeys(occurences);
-	WebElement medicalServices =driver.findElement(By.id("med-services_new0"));
-	commonLib.selectDropdownByVisibleText(medicalServices, otherservices);
+		//ObjectRepository repoObject = new ObjectRepository(driver);
+		repoObject.physicianVisits().sendKeys(visitstophysician);
+		repoObject.specialistVisits().sendKeys(visittospecialist);
+		repoObject.occurenceVisits().sendKeys(occurences);
+	commonLib.selectDropdownByVisibleText(repoObject.medicalServices(), otherservices);
 	}
 
 	@And("^Click on Estimate my HealthCare Costs button$")
 	public void click_on_estimate_my_healthcare_costs_button() throws Throwable {
-	WebElement element = driver.findElement(By.xpath("//div[@class='buttonwrap']/button"));
-	element.click();
+		repoObject.healthCareCostsButton().click();
 	}
 
 	@Then("^Validate plan details appeared on the page$")
