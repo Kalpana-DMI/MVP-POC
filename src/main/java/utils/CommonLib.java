@@ -1,6 +1,9 @@
 package utils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.JavascriptExecutor;
@@ -78,10 +81,11 @@ public class CommonLib extends Base{
 	}
 
 	public void ValidateTitle(String expected) throws InterruptedException {
-		Thread.sleep(3000);
-		String childWindow = driver.getWindowHandles().toArray()[1].toString();
-		new WebDriverWait(driver,10).until(ExpectedConditions.numberOfWindowsToBe(2));
-		driver.switchTo().window(childWindow);
+		Thread.sleep(5000);
+		Set<String> windowHandles=driver.getWindowHandles();
+		List<String> windowStrings = new ArrayList<String>(windowHandles);
+		String reqWindow = windowStrings.get(1);
+		driver.switchTo().window(reqWindow);
 		String Actual = driver.getCurrentUrl();
 		System.out.println(Actual);
 		Assert.assertTrue(Actual.contains(expected));

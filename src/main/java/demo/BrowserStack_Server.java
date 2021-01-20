@@ -27,7 +27,8 @@ public class BrowserStack_Server extends Base{
 	    caps.setCapability("os_version", "10");
 	    caps.setCapability("name", "MVP-POC Test"); // test name
 	    caps.setCapability("build", "BStack Build Number 1"); // CI/CD job or build name
-	    caps.setCapability("browserstack.selenium_version", "3.14.0");
+	    //caps.setCapability("browserstack.selenium_version", "3.14.0");
+	    caps.setCapability("browserstack.selenium_version", "4.0.0-alpha-2");
 	    driver = new RemoteWebDriver(new URL(URL), caps);  	
 	    driver.get(jsonData.ReadData(url));
 	}	  	  	

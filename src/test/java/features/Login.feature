@@ -1,6 +1,6 @@
 Feature: Medicare Member Page
 
-
+@test
 Scenario: Validate DestinationRX tool
 Given  User is on application homepage
 When User Clicks on Shop for a Plan Link

@@ -22,6 +22,8 @@ import org.apache.logging.log4j.Logger;
 import org.json.simple.parser.ParseException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 public class Login extends Base {
@@ -91,13 +93,18 @@ public class Login extends Base {
 
 	@Then("^User enters the \"([^\"]*)\" as ZipCode$")
 	public void user_enters_the_as_ZipCode(String zipcode) throws Throwable {
+		Thread.sleep(5000);
+		WebDriverWait wait = new WebDriverWait(driver, 100);
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()=' View plans ']//../../..//input")));	   
 		repoObject.zipCode().sendKeys(zipcode);
 	}
 
 	@Then("^Click on View Plans$")
 	public void click_on_View_Plans() throws Throwable {
-		Thread.sleep(3000);
-		commonLib.ClickUsingJavaScript(repoObject.viewPlans());
+		Thread.sleep(1000);
+		WebDriverWait wait = new WebDriverWait(driver, 100);
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()=' View plans ']")));
+	    commonLib.ClickUsingJavaScript(repoObject.viewPlans());
 		
 	}
 
