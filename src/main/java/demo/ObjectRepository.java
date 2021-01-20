@@ -6,9 +6,6 @@ import org.openqa.selenium.WebElement;
 
 public class ObjectRepository extends Base {
 
-	public ObjectRepository() {
-	}
-
 By image = By.xpath("//img[@alt=\"MVP Health Care(R)\"]");
 By shopLink = By.xpath("//li[@class='shoplink']//a[text()='Shop for a Plan']");
 By medicareLink = By.xpath("(//a[text()='Medicare'])[3]");

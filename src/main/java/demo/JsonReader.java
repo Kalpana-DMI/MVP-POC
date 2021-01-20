@@ -18,16 +18,7 @@ public class JsonReader {
 		JSONObject jsonobj=(JSONObject)jsonparse.parse(new FileReader("jsonData\\Credentials.json"));
 	
 		String value = (String)jsonobj.get(param);
-		
-		//Make below line of code  generic, when JSON array is being used.
-//		JSONArray array=(JSONArray)jsonobj.get("medicalplan");
-//		for(int i=0;i<array.size();i++) {
-//			
-//			JSONObject plan=(JSONObject)array.get(i);
-//			
-//			String plannumber=(String)plan.get("plannumber");
-//			
-//		}
+	
 		return value;
 	}
 }

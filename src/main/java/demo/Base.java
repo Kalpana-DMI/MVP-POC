@@ -29,10 +29,8 @@ import cucumber.api.Scenario;
 public class Base {
 
 	public static  WebDriver driver;
-	
 	JsonReader jsonData=new JsonReader();
-	
-	
+		
 public WebDriver initializeDriver() throws IOException, ParseException
 {
 	String url="URL";	
@@ -47,8 +45,7 @@ public WebDriver initializeDriver() throws IOException, ParseException
 }
 
 
-public static void TakeScreenshot(Scenario scenario ) {
-	
+public static void TakeScreenshot(Scenario scenario ) {	
 	if(scenario.isFailed()) {
 		System.out.println("working hooks");
 		
@@ -66,12 +63,5 @@ try {
 catch (IOException e) {
 } 
 }
-
-
-}
-
-public void CloseDriver() {
-  driver.quit();
-	
 }
 }

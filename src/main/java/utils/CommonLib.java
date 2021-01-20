@@ -7,21 +7,15 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import demo.Base;
 
 
 public class CommonLib extends Base{
-	//Base base=new Base();
-	
-	//Select value from list
-	public void SelectValueFromList(String Listxpath,String value) {
-		
-		
-		
-	}
 	
 	public  String generateRandomID() {
 		String transName = "DMI";
@@ -86,6 +80,7 @@ public class CommonLib extends Base{
 	public void ValidateTitle(String expected) throws InterruptedException {
 		Thread.sleep(3000);
 		String childWindow = driver.getWindowHandles().toArray()[1].toString();
+		new WebDriverWait(driver,10).until(ExpectedConditions.numberOfWindowsToBe(2));
 		driver.switchTo().window(childWindow);
 		String Actual = driver.getCurrentUrl();
 		System.out.println(Actual);
@@ -113,5 +108,11 @@ public class CommonLib extends Base{
 		}
 	}
 	
+	//Select value from list
+		public void SelectValueFromList(String Listxpath,String value) {
+			
+			
+			
+		}
 	
 }

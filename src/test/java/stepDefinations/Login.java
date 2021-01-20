@@ -3,12 +3,13 @@ package stepDefinations;
 import cucumber.api.DataTable;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
+import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import demo.Base;
-
+import demo.BrowserStack_Server;
 import demo.JsonReader;
 import demo.ObjectRepository;
 import utils.CommonLib;
@@ -18,6 +19,7 @@ import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.json.simple.parser.ParseException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -28,11 +30,21 @@ public class Login extends Base {
 	JsonReader jsonData=new JsonReader();
 	CommonLib commonLib=new CommonLib();
 	ObjectRepository repoObject = new ObjectRepository();
-
+	BrowserStack_Server browserStack=new BrowserStack_Server();
+	
+/**This code is for executing the code using BrowserStack/ locally.Comment out first method
+ * to execute locally.And,do vice versa to execute the code through BrowserStack.
+ * @throws Throwable
+ */
+	@Before
+	public void BeforeScenario() throws IOException, ParseException {
+		
+		browserStack.ExecuteUsingBrowserStack();
+		//driver=initializeDriver();
+	} 
 	
 	@Given("^User is on application homepage$")
 	public void user_is_on_application_homepage() throws Throwable {
-		driver=initializeDriver();
 	   Assert.assertTrue(repoObject.homePage().isDisplayed(), "image is not dispalyed");
 	}
 
@@ -93,8 +105,7 @@ public class Login extends Base {
 	public void validate_all_below_sections_appeared_with_available_no_of_plans(DataTable availableplans) throws Throwable {
 		List<List<String>> list = availableplans.raw();
 		for(int i=0,j=0;j<3;j++) {
-		/**Not creating repo element for the below element because of dynamic variables i & j
-		**/
+		/**Not creating repository element for the below element because of dynamic variables i & j**/
 		WebElement Plan1=driver.findElement(By.xpath("//span[text()=' "+list.get(i).get(j)+"']"));
 		Assert.assertEquals(Plan1.getText(),list.get(i).get(j));
 		}

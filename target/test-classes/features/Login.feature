@@ -1,6 +1,6 @@
 Feature: Medicare Member Page
 
-@test
+
 Scenario: Validate DestinationRX tool
 Given  User is on application homepage
 When User Clicks on Shop for a Plan Link
@@ -14,7 +14,6 @@ And User enters the "12345" as ZipCode
 And Click on View Plans
 Then Validate all below sections appeared with available no. of plans
 | Medicare Advantage Prescription Drug Plans| Medicare Advantage Plans| Prescription Drug Plans|
-
 
 @test
 Scenario Outline: Validate Medicare marketing tool
