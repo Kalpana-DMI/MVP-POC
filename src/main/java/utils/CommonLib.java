@@ -112,11 +112,5 @@ public class CommonLib extends Base{
 		}
 	}
 	
-	//Select value from list
-		public void SelectValueFromList(String Listxpath,String value) {
-			
-			
-			
-		}
 	
 }

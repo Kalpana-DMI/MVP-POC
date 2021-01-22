@@ -58,7 +58,7 @@ try {
  
  Reporter.addScreenCaptureFromPath(destinationPath.toString());
  Reporter.addScenarioLog(screenshotName);
-//scenario.embed(data, mimeType);
+
 }
 catch (IOException e) {
 } 
